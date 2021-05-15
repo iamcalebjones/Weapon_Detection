@@ -61,19 +61,25 @@ Again in this image, the standard model did not see the pistol, but neither did 
 
 For this third image, all three models detected the pistol, with the standard model having the highest confidence at 85%. The resized model falsely detected my wristwatch as a pistol, and the augmented model was only 67% confident in this detection.
 
-Still images are fine, and a fast way to test out a model, but I wanted to see this in action on a video clip. What the clip will show is the model's performance on a few random household items first, namely a pasta spoon, a grilling spatula, a set of wire strippers, and a hammer. When I get to the actual firearm, **in part of my handling of the weapon, the pistol is pointed directly at the camera**, because I wanted to demonstrate the model's ability to detect all orientations of the weapon. 
+Still images are fine, and a fast way to test out a model, but I wanted to see this in action on a video clip. What the clip will show is the model's performance on a few random household items first, namely a pasta spoon, a grilling spatula, a set of wire strippers, and a hammer. When I get to the actual firearm, **in part of my handling of the weapon, the pistol is pointed directly at the camera**, because I wanted to demonstrate the model's ability to detect all orientations of the weapon. Additionally, I demonstrate that the weapon is empty before proceeding with the deomonstration.
 
 <p align="center">
   <img src="https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/standard_final.gif">
 </p>
 
-In the video clip, we can see that although there are a few false detections of the test objects, they are generally brief and low confidence. I think the wire strippers got up to 90% for a moment, but the confidence levels jumped around a lot. For the pistol however, the confidence levels were above 90% for the majority of the clip, and only dropped when the pistol was turned to less common orientations, like upside-down. 
+In the video clip, we can see that although there are a few false detections of the test objects, they are generally brief and low confidence. I think the wire strippers got up to 90% for a moment, but the confidence levels jumped around a lot. For the pistol however, the confidence levels were above 90% for the majority of the clip, and only dropped significantly when the pistol was turned to less common orientations, like upside-down. 
 
-## Applications and Conclusion
+## Applications
 
-In society nowadays, security cameras are everywhere, although their use is generally intended to limit loss to businesses in the event of theft or accidents. By leveraging these advances in computer vision though, current security systems could be turned from passive to active systems, and incorporated as a part of an early warning system in public places where shootings have tended to occur. This would prevent or limit the impact of the next attempted mass shooting by having the ability to alert authorities as soon as a weapon is seen.
+In society nowadays, security cameras are everywhere, although their use is generally intended to limit loss to businesses in the event of theft or accidents. By leveraging these advances in computer vision though, current security systems could be turned from passive into active systems, and incorporated as a part of an early warning system in public places where shootings have tended to occur. By sounding an alarm and alerting emergency personnel, this would prevent or limit the impact of the next attempted mass shooting as soon as a weapon is seen.
 
-Touching on the model's performance for a moment, the security system rollout would need to include thresholds for triggering an alarm, such as confidence levels and time durations of said confidence levels, to avoid triggering on false detections. And development of a model like this would need to be much more robust, with training datasets containing many more images than I included.
+Touching on the model's performance for a moment, the security system rollout would need to include thresholds for triggering an alarm, such as confidence levels and time durations of said confidence levels, to avoid triggering on false detections. And development of a model like this would need to be much more robust, with training datasets containing many more images than I included here.
 
 Additionally, a deployable model would ideally be trained on a host of weapon types, not only pistols. It should include rifle-type weapons, as well as knives. The data is out there, it just needs to be collected and included on future development of this concept.
+
+## Conclusion
+
+Joseph Redmon, one of the developers of the YOLO model architecture, said in his [TED Talk](https://www.youtube.com/watch?v=Cgxsv1riJhI&t=333s) that the model is "open source and in the public domain, free for anyone to use," and that "now we have a pretty powerful solution to this low level computer vision problem, and anyone can take it and build something with it, so now the rest is up to all of you." 
+
+Thank you for your work and contribution to society and technology, Joseph, and I hope this becomes implemented someday.
 
