@@ -1,5 +1,5 @@
 # Weapon Detection with Computer Vision
-## Using technology to detect weapons in video footage
+## Using computer vision to detect weapons in video footage
 #### by Caleb Jones
 [LinkedIn](https://www.linkedin.com/in/calebsjones/) | [GitHub](https://github.com/iamcalebjones) | [Presentation Slides](https://www.beautiful.ai/player/-M_m0fACA3YtgjsssTaz)
 
@@ -7,13 +7,13 @@
   <img src="https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/main_pic.png">
 </p>
 
-**Warning**: this writeup features images and videos of myself handling a real firearm during testing the model. The weapon was unloaded, and this is also demonstrated in the video.
+**Warning**: This writeup features images and videos of me handling a real firearm during testing of the model. The weapon was unloaded during the demonstrations, which is also captured in the video.
 
 ## Problem
 
-Mass shootings, by definition in America in 2021, are gun-related incidents in which 4 or more people are injured or killed by a firearm. These have happened everywhere from grocery stores to house parties, but the ones we tend to hear about generally involve very public places, frequently schools, concerts, restaurants, shopping centers, and places of worship. The weapons used in these incidents are also widely variable, but the most commonly used weapons are pistols, with 9mm and .22 calibers leading the list. And after every event, the news circuits show headlines about how to deal with it, and politicians make promises about more legislation and tighter restrictions required to obtain a firearm. 
+Mass shootings, by definition in America in 2021, are gun-related incidents in which 4 or more people are injured or killed by a firearm. These have happened everywhere from grocery stores to house parties, but the ones we tend to hear about generally involve very public places, frequently schools, concerts, restaurants, shopping centers, and places of worship. The weapons used in these incidents are also widely variable, but the most commonly used weapons are pistols, with 9mm and .22 calibers leading the list. And after every event, the news circuits show headlines about how to deal with it, and politicians make promises about more legislation and tighter restrictions required to obtain firearms.
 
-But the question I had was how can technology help? In a culture saturated with technology, surely there must be a use of technology to prevent or limit the impact of these events. In exploring this question, I was brought to the field of computer vision.
+But the question I had was what role can technology play in fighting this problem? In a culture saturated with technology, surely it has a role in preventing these events. In exploring this question, I was brought to the field of computer vision.
 
 ## Computer Vision
 
@@ -28,6 +28,52 @@ In choosing to proceed with a computer vision task, I needed to pick a framework
 
 ## The Data
 
-I found a dataset that was built for exactly a problem like this. It is a collection of images and accompanying annotations with bounding box data and class labels put together for exactly this type of project. The data was provided by the [Andalusian Research Institute](https://dasci.es/) at the University of Grenada, and it contained several weapons classes as well as non-weapon classes for the purpose of variety in training. I focused on the dataset for [pistol dataset](https://github.com/ari-dasci/OD-WeaponDetection/tree/master/Pistol%20detection) to get started and prove concept. 
+I found a dataset that was built for exactly a problem like this. It is a collection of images of a host of weapons and accompanying annotations with bounding box data and class labels, which was put together for exactly this type of project. The data was provided by the [Andalusian Research Institute](https://dasci.es/) at the University of Grenada, and it contained several weapons classes as well as non-weapon classes for the purpose of variety in training. I focused on the dataset for [pistols](https://github.com/ari-dasci/OD-WeaponDetection/tree/master/Pistol%20detection) to get started and prove a concept. 
 
-This dataset contains 3000 images of pistols in a variety of settings and orientations, being held, laying on a table, even cartoon guns were represented. In my reading about the YOLOv5 platform, 100-500 images were recommended for training a model on a new object, so I arbitrarily chose to use a third of the pistol images for my model, because although up to 500 were recommended, less isn't more, more is more. The train/test split that I worked with contained 692 images for training, 198 images for validation, and 99 images for testing.
+This dataset contains 3000 images of pistols in a variety of settings and orientations, which included being held, laying on a table, and even cartoon guns were represented. In my reading about the YOLOv5 platform, 100-500 images were recommended for training a model on a new object, so I arbitrarily chose to use a third of the pistol images for my model, because although up to 500 images were recommended, less isn't more, more is more. The train/test split that I worked with contained 692 images for training, 198 images for validation, and 99 images for testing.
+
+## Training the Model
+
+I used Google's Colaboratory cloud computing environment for my training runs due to the fact that it is free while still providing access to GPU services for much faster training. I also decided to train a few models on different versions of the data, described below.
+* __Standard Model__: this version of the data was just the raw images with no augmentations or resizing applied in preprocessing
+* __Resized Model__: this version of the data contained the images resized to 416x416 pixels, with white borders applied to the spaces in rectangular images
+* __Augmented Model__: this version of the data contained the images resized and several augmentations as well: horizontal and vertical flipping, and +/- 30-degree horizontal and vertical shear
+
+## Model Results
+
+Out of the three models, the standard model did the best with a plain background, but the resized and augmented models did the best with a busy background. First, a few images for comparison.
+
+<p align="center">
+  <img src="https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/demo_1.png">
+</p>
+
+For this image, the standard model did not detect the pistol, and the resized and augmented models detected with only 59% and 61% confidence, respectively. After a few more tests, I realized that the busy background increased the difficulty of the models to see the weapon.
+
+<p align="center">
+  <img src="https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/demo_2.png">
+</p>
+
+Again in this image, the standard model did not see the pistol, but neither did the other two for that matter, detecting objects that were not pistols as pistols.
+
+<p align="center">
+  <img src="https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/demo_3.png">
+</p>
+
+For this third image, all three models detected the pistol, with the standard model having the highest confidence at 85%. The resized model falsely detected my wristwatch as a pistol, and the augmented model was only 67% confident in this detection.
+
+Still images are fine, and a fast way to test out a model, but I wanted to see this in action on a video clip. What the clip will show is the model's performance on a few random household items first, namely a pasta spoon, a grilling spatula, a set of wire strippers, and a hammer. When I get to the actual firearm, **in part of my handling of the weapon, the pistol is pointed directly at the camera**, because I wanted to demonstrate the model's ability to detect all orientations of the weapon. 
+
+<p align="center">
+  <img src="https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/standard_final.gif">
+</p>
+
+In the video clip, we can see that although there are a few false detections of the test objects, they are generally brief and low confidence. I think the wire strippers got up to 90% for a moment, but the confidence levels jumped around a lot. For the pistol however, the confidence levels were above 90% for the majority of the clip, and only dropped when the pistol was turned to less common orientations, like upside-down. 
+
+## Applications and Conclusion
+
+In society nowadays, security cameras are everywhere, although their use is generally intended to limit loss to businesses in the event of theft or accidents. By leveraging these advances in computer vision though, current security systems could be turned from passive to active systems, and incorporated as a part of an early warning system in public places where shootings have tended to occur. This would prevent or limit the impact of the next attempted mass shooting by having the ability to alert authorities as soon as a weapon is seen.
+
+Touching on the model's performance for a moment, the security system rollout would need to include thresholds for triggering an alarm, such as confidence levels and time durations of said confidence levels, to avoid triggering on false detections. And development of a model like this would need to be much more robust, with training datasets containing many more images than I included.
+
+Additionally, a deployable model would ideally be trained on a host of weapon types, not only pistols. It should include rifle-type weapons, as well as knives. The data is out there, it just needs to be collected and included on future development of this concept.
+
