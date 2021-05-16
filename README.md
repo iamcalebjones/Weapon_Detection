@@ -61,10 +61,16 @@ Again in this image, the standard model did not see the pistol, but neither did 
 
 For this third image, all three models detected the pistol, with the standard model having the highest confidence at 85%. The resized model falsely detected my wristwatch as a pistol, and the augmented model was only 67% confident in this detection.
 
-Still images are fine, and a fast way to test out a model, but I wanted to see this in action on a video clip. What the clip will show is the model's performance on a few random household items first, namely a pasta spoon, a grilling spatula, a set of wire strippers, and a hammer. When I get to the actual firearm, **in part of my handling of the weapon, the pistol is pointed directly at the camera**, because I wanted to demonstrate the model's ability to detect all orientations of the weapon. Additionally, I demonstrate that the weapon is empty before proceeding with the deomonstration.
+Still images are fine, and a fast way to test out a model, but I wanted to see this in action on video. Below are some tests of the standard model on a few household itms, namely a pasta spoon, a grilling spatula, a set of wire strippers, and a hammer. When I get to the actual firearm, I demonstrate that the weapon is empty before proceeding with the deomonstration, and **in part of my handling of the weapon, the pistol is pointed directly at the camera**, because I wanted to demonstrate the model's ability to detect all orientations of the weapon.
+
+| Spoon | Spatula | Wire Strippers | Hammer |
+| -- | -- | -- | -- |
+![](https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/object_test_spoon.gif) | ![](https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/object_test_spatula.gif) | ![](https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/object_test_wire_strippers.gif) | ![](https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/object_test_hammer.gif) |
+
+And now the demo with the pistol.
 
 <p align="center">
-  <img src="https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/standard_final.gif">
+  <img src="https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/object_test_pistol.gif">
 </p>
 
 In the video clip, we can see that although there are a few false detections of the test objects, they are generally brief and low confidence. I think the wire strippers got up to 90% for a moment, but the confidence levels jumped around a lot. For the pistol however, the confidence levels were above 90% for the majority of the clip, and only dropped significantly when the pistol was turned to less common orientations, like upside-down. 
