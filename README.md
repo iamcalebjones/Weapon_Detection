@@ -67,7 +67,7 @@ Still images are fine, and a fast way to test out a model, but I wanted to see t
 | -- | -- | -- | -- |
 ![](https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/object_test_spoon.gif) | ![](https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/object_test_spatula.gif) | ![](https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/object_test_wire_strippers.gif) | ![](https://github.com/iamcalebjones/Weapon_Detection/blob/main/demos/object_test_hammer.gif) |
 
-In the video clips, we can see that although there are a few false detections of the test objects, they are generally brief and low confidence. I think the wire strippers got up to 90% for a moment, but the confidence levels jumped around a lot.
+In the video clips, we can see that although there are a few false detections of the test objects, they are generally brief and low confidence. At one point, the wire strippers got up to 90% confidence for a moment, but the confidence levels jumped around a lot.
 
 And now the demonstration with the pistol, again on the standard model.
 
@@ -81,9 +81,11 @@ For the pistol the confidence levels were above 90% for the majority of the clip
 
 In society nowadays, security cameras are everywhere, although their use is generally intended to limit loss to businesses in the event of theft or accidents. By leveraging these advances in computer vision though, current security systems could be turned from passive into active systems, and incorporated as a part of an early warning system in public places where shootings have tended to occur. By sounding an alarm and alerting emergency personnel, this would prevent or limit the impact of the next attempted mass shooting as soon as a weapon is seen.
 
-Touching on the model's performance for a moment, the security system rollout would need to include thresholds for triggering an alarm, such as confidence levels and time durations of said confidence levels, to avoid triggering on false detections. And development of a model like this would need to be much more robust, with training datasets containing many more images than I included here.
+Touching on the model's performance for a moment, the security system rollout would need to include thresholds for triggering an alarm, such as minimum confidence levels and time durations of those confidence levels, to avoid triggering on false detections. And development of a model like this would need to be much more robust, with training datasets containing many more images than I included here.
 
 Additionally, a deployable model would ideally be trained on a host of weapon types, not only pistols. It should include rifle-type weapons, as well as knives. The data is out there, it just needs to be collected and included on future development of this concept.
+
+These steps for further development will also include training on more images in each class, which will hopefully help the final model be able to better distinguish weapons in noisy backgrounds like the still image examples above. Because in a real life scenario, there is a good chance that the image settings will not be ideally clean white backgrounds like I tested in my videos here.
 
 ## Conclusion
 
